@@ -65,3 +65,73 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+
+
+
+
+
+
+
+PS C:\Users\deekshith.p\Llama_Index_PDF_RAG> streamlit run c:/Users/deekshith.p/Llama_Index_PDF_RAG/Llama_Index_Excel.py
+
+  You can now view your Streamlit app in your browser.
+
+  Local URL: http://localhost:8501
+  Network URL: http://192.168.1.4:8501
+
+2024-03-26 14:29:07.356 Uncaught app exception
+Traceback (most recent call last):
+  File "c:\Users\deekshith.p\Llama_Index_PDF_RAG\.venv\lib\site-packages\streamlit\runtime\scriptrunner\script_runner.py", line 535, in _run_script
+    exec(code, module.__dict__)
+  File "C:\Users\deekshith.p\Llama_Index_PDF_RAG\Llama_Index_Excel.py", line 70, in <module>
+    main()
+  File "C:\Users\deekshith.p\Llama_Index_PDF_RAG\Llama_Index_Excel.py", line 57, in main
+    df.to_csv(file_path, index=False)
+  File "c:\Users\deekshith.p\Llama_Index_PDF_RAG\.venv\lib\site-packages\pandas\util\_decorators.py", line 333, in wrapper
+    return func(*args, **kwargs)
+  File "c:\Users\deekshith.p\Llama_Index_PDF_RAG\.venv\lib\site-packages\pandas\core\generic.py", line 3964, in to_csv
+    return DataFrameRenderer(formatter).to_csv(
+  File "c:\Users\deekshith.p\Llama_Index_PDF_RAG\.venv\lib\site-packages\pandas\io\formats\format.py", line 1014, in to_csv
+    csv_formatter.save()
+  File "c:\Users\deekshith.p\Llama_Index_PDF_RAG\.venv\lib\site-packages\pandas\io\formats\csvs.py", line 251, in save
+    with get_handle(
+  File "c:\Users\deekshith.p\Llama_Index_PDF_RAG\.venv\lib\site-packages\pandas\io\common.py", line 873, in get_handle
+    handle = open(
+PermissionError: [Errno 13] Permission denied: './storage\\Structured_Data'
+2024-03-26 14:31:32.426 Uncaught app exception
+Traceback (most recent call last):
+  File "c:\Users\deekshith.p\Llama_Index_PDF_RAG\.venv\lib\site-packages\streamlit\runtime\scriptrunner\script_runner.py", line 535, in _run_script
+    exec(code, module.__dict__)
+  File "C:\Users\deekshith.p\Llama_Index_PDF_RAG\Llama_Index_Excel.py", line 69, in <module>
+    main()
+  File "C:\Users\deekshith.p\Llama_Index_PDF_RAG\Llama_Index_Excel.py", line 56, in main
+    df.to_csv(file_path, index=False)
+  File "c:\Users\deekshith.p\Llama_Index_PDF_RAG\.venv\lib\site-packages\pandas\util\_decorators.py", line 333, in wrapper
+    return func(*args, **kwargs)
+  File "c:\Users\deekshith.p\Llama_Index_PDF_RAG\.venv\lib\site-packages\pandas\core\generic.py", line 3964, in to_csv
+    return DataFrameRenderer(formatter).to_csv(
+  File "c:\Users\deekshith.p\Llama_Index_PDF_RAG\.venv\lib\site-packages\pandas\io\formats\format.py", line 1014, in to_csv
+    csv_formatter.save()
+  File "c:\Users\deekshith.p\Llama_Index_PDF_RAG\.venv\lib\site-packages\pandas\io\formats\csvs.py", line 251, in save
+    with get_handle(
+  File "c:\Users\deekshith.p\Llama_Index_PDF_RAG\.venv\lib\site-packages\pandas\io\common.py", line 749, in get_handle
+    check_parent_directory(str(handle))
+  File "c:\Users\deekshith.p\Llama_Index_PDF_RAG\.venv\lib\site-packages\pandas\io\common.py", line 616, in check_parent_directory
+    raise OSError(rf"Cannot save file into a non-existent directory: '{parent}'")
+OSError: Cannot save file into a non-existent directory: 'storage\Confidential'
+2024-03-26 14:33:25.071 Uncaught app exception
+Traceback (most recent call last):
+  File "c:\Users\deekshith.p\Llama_Index_PDF_RAG\.venv\lib\site-packages\streamlit\runtime\scriptrunner\script_runner.py", line 535, in _run_script
+    exec(code, module.__dict__)
+  File "C:\Users\deekshith.p\Llama_Index_PDF_RAG\Llama_Index_Excel.py", line 69, in <module>
+    main()
+  File "C:\Users\deekshith.p\Llama_Index_PDF_RAG\Llama_Index_Excel.py", line 64, in main
+    agent = create_agent(llm, df)
+  File "C:\Users\deekshith.p\Llama_Index_PDF_RAG\Llama_Index_Excel.py", line 23, in create_agent
+    agent = create_csv_agent(llm, df, verbose=verbose)
+  File "c:\Users\deekshith.p\Llama_Index_PDF_RAG\.venv\lib\site-packages\langchain_experimental\agents\agent_toolkits\csv\base.py", line 65, in create_csv_agent
+    raise ValueError(f"Expected str, list, or file-like object, got {type(path)}")
+ValueError: Expected str, list, or file-like object, got <class 'pandas.core.frame.DataFrame'>
+
