@@ -1,0 +1,59 @@
+import streamlit as st
+import pandas as pd
+from langchain_openai import AzureChatOpenAI
+from langchain_experimental.agents import create_csv_agent
+
+# Function to initialize LLM
+def initialize_llm(api_key, azure_endpoint, api_version):
+    llm = AzureChatOpenAI(
+        model="gpt-35-turbo-16k",
+        azure_deployment="gpt-35-turbo-16k",
+        api_key=api_key,
+        azure_endpoint=azure_endpoint,
+        api_version=api_version,
+    )
+    return llm
+
+# Function to create agent
+def create_agent(llm, file_path, verbose=True):
+    agent = create_csv_agent(llm, file_path, verbose=verbose)
+    return agent
+
+# Function to run agent
+def run_agent(agent, query):
+    try:
+        response = agent.run(query)
+    except ValueError as e:
+        response = str(e)
+        if not response.startswith("Could not parse LLM output: `"):
+            raise e
+        response = response.removeprefix("Could not parse LLM output: `").removesuffix("`")
+    return response
+
+def main():
+    st.title("Excel Query App")
+
+    # File uploader for Excel file
+    uploaded_file = st.file_uploader("Upload Excel file", type=["csv"])
+
+    # Input box for API key, Azure endpoint, and API version
+    api_key = st.text_input("Enter API key")
+    azure_endpoint = st.text_input("Enter Azure endpoint")
+    api_version = st.text_input("Enter API version")
+
+    if uploaded_file:
+        df = pd.read_csv(uploaded_file)
+        st.write(df)
+
+        # Query input box
+        query = st.text_input("Enter query")
+
+        # "Query Excel" button
+        if st.button("Query Excel"):
+            llm = initialize_llm(api_key, azure_endpoint, api_version)
+            agent = create_agent(llm, uploaded_file.name)
+            response = run_agent(agent, query)
+            st.write("Response:", response)
+
+if __name__ == "__main__":
+    main()
